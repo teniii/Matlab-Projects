@@ -1,0 +1,696 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Tema3</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-04-07"><meta name="DC.source" content="Tema3.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Exercitiul 1</a></li><li><a href="#2">Exercitiul 3</a></li><li><a href="#3">Exercitiul 5</a></li><li><a href="#4">Exercitiul 8</a></li><li><a href="#5">Metoda Gauss fara pivotare</a></li><li><a href="#6">Metoda Gauss cu pivotare partiala</a></li><li><a href="#7">Metoda Gauss cu pivotare totala</a></li><li><a href="#8">Metoda Substitutiei Descendente</a></li><li><a href="#9">Metoda Substitutiei Ascendente</a></li><li><a href="#10">Factorizarea LU cu Gauss pivotare partiala</a></li><li><a href="#11">Fatorizarea Cholesky</a></li></ul></div><h2 id="1">Exercitiul 1</h2><pre class="codeinput">A=[0 1 1;2 1 5;4 2 1];
+b=[3;5;1];
+GaussFaraPiv(A,b)
+GaussPivPart(A,b)
+GaussPivTot(A,b)
+
+A=[0 1 -2;1 -1 1;1 0 -1];
+b=[4;6;2];
+GaussFaraPiv(A,b)
+GaussPivPart(A,b)
+GaussPivTot(A,b)
+</pre><pre class="codeoutput">
+ans =
+
+    -1     2     1
+
+</pre><h2 id="2">Exercitiul 3</h2><pre class="codeinput"><span class="comment">%c)</span>
+eps=10^(-20);
+A=[eps 1;1 1];
+b=[1;2];
+GaussFaraPiv(A,b)
+GaussPivPart(A,b)
+
+C=10^(20);
+A=[1 C;1 1];
+b=[C;2];
+GaussPivPart(A,b)
+GaussPivTot(A,b)
+
+<span class="comment">%Se poate observa ca Metoda GFP nu functioneaza pentru valori foarte mici</span>
+<span class="comment">%ale coeficientilor, iar GPP nu functioneaza pentru valori foarte mari ale</span>
+<span class="comment">%coeficientilor</span>
+</pre><pre class="codeoutput">
+ans =
+
+     1     1
+
+</pre><h2 id="3">Exercitiul 5</h2><pre class="codeinput">A=[1 2 -1;2 4 7;-1 2 5];
+b=[2;13;10];
+[L,U,w]=LU_GPP(A);
+n=length(w);
+<span class="keyword">for</span> i=1:n-1
+    b([i,w(i)])=b([w(i),i]);
+<span class="keyword">end</span>
+y=SubsAsc(L,b)
+x=SubsDesc(U,b)
+</pre><h2 id="4">Exercitiul 8</h2><pre class="codeinput">A=[1 2 3; 2 5 8;3 8 14];
+b=[-5;-14;-25];
+L=FactCholesky(A)
+y=SubsAsc(L,b)
+x=SubsDesc(L',y)
+</pre><h2 id="5">Metoda Gauss fara pivotare</h2><pre class="codeinput"><span class="keyword">function</span> [x] = GaussFaraPiv(A,b)
+
+p=-1;
+n=size(A,1);
+A=[A,b];
+<span class="keyword">for</span> k=1:n-1
+    <span class="keyword">for</span> j=k:n
+        <span class="keyword">if</span> A(j,k)~=0
+            p=j;
+            <span class="keyword">break</span>;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    <span class="keyword">if</span> p==-1
+        fprintf(<span class="string">'Sist. incomp. sau comp. nedet'</span>);
+        x=<span class="string">'error'</span>;
+        <span class="keyword">return</span>;
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> p~=k
+        A([p,k],:)=A([k,p],:);
+    <span class="keyword">end</span>
+    <span class="keyword">for</span> l=k+1:n
+        mlk=A(l,k)/A(k,k);
+        A(l,:)=A(l,:)-mlk*A(k,:);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> A(n,n) == 0
+    fprintf(<span class="string">'Sist. incomp. sau comp. nedet.'</span>);
+    x=<span class="string">'error'</span>;
+    <span class="keyword">return</span>;
+<span class="keyword">end</span>
+
+x=SubsDesc(A(1:n,1:n),A(:,n+1));
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">Sist. incomp. sau comp. nedet.
+ans =
+
+    'error'
+
+</pre><pre class="codeoutput">
+ans =
+
+   1.0e+04 *
+
+    1.1102    0.0001
+
+</pre><h2 id="6">Metoda Gauss cu pivotare partiala</h2><pre class="codeinput"><span class="keyword">function</span> [x] = GaussPivPart(A,b)
+
+n=size(A,1);
+A=[A,b];
+
+<span class="keyword">for</span> k=1:n-1
+    max = abs(A(k,k));
+    p=k;
+   <span class="keyword">for</span> i=k:n
+
+           <span class="keyword">if</span> abs(A(i,k)) &gt; max
+               max = abs(A(i,k));
+               p=i;
+
+       <span class="keyword">end</span>
+   <span class="keyword">end</span>
+<span class="keyword">if</span>(max==0)
+    fprintf(<span class="string">'Sistem incompatibil sau nedeterminat'</span>);
+    x=<span class="string">'error'</span>;
+    <span class="keyword">return</span>;
+<span class="keyword">end</span>
+<span class="keyword">if</span> p~=k
+    A([p,k], :) = A([k,p], :);
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> l=k+1:n
+    M(l,k) = A(l,k)/A(k,k);
+    A(l,:) = A(l,:) - M(l,k)*A(k,:);
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> A(n,n) == 0
+    fprintf(<span class="string">'Sistem incompatibil sau nedeterminat'</span>);
+    x=<span class="string">'error'</span>;
+    <span class="keyword">return</span>;
+<span class="keyword">end</span>
+
+x = SubsDesc(A(1:n, 1:n), A(:, n+1));
+
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">
+ans =
+
+    -1     2     1
+
+</pre><pre class="codeoutput">Sistem incompatibil sau nedeterminat
+ans =
+
+    'error'
+
+</pre><pre class="codeoutput">
+ans =
+
+     1     1
+
+
+ans =
+
+     0     1
+
+</pre><h2 id="7">Metoda Gauss cu pivotare totala</h2><pre class="codeinput"><span class="keyword">function</span> [x] = GaussPivTot(A,b)
+n=length(b); <span class="comment">%n=size(A,1)</span>
+index=1:n;
+A=[A,b];
+<span class="keyword">for</span> k=1:n-1
+   max = abs(A(k,k));
+   <span class="keyword">for</span> i=k:n
+       <span class="keyword">for</span> j=k:n
+           <span class="keyword">if</span> abs(A(i,j)) &gt; max
+               max = abs(A(i,j));
+               p=i;
+               m=j;
+           <span class="keyword">end</span>
+       <span class="keyword">end</span>
+   <span class="keyword">end</span>
+<span class="keyword">if</span>(max==0)
+    fprintf(<span class="string">'Sistem incompatibil sau nedeterminat'</span>);
+    x=<span class="string">'error'</span>;
+    <span class="keyword">return</span>;
+<span class="keyword">end</span>
+<span class="keyword">if</span> p~=k
+    A([p,k], :) = A([k,p], :);
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> m~=k
+    A(:, [m,k]) = A (:, [k,m]);
+    index([m,k])=index([k,m]);
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> l=k+1:n
+    mlk = A(l,k)/A(k,k);
+    A(l,:) = A(l,:) - mlk*A(k,:);
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> A(n,n) == 0
+    fprintf(<span class="string">'Sistem incompatibil sau nedeterminat'</span>);
+    x=<span class="string">'error'</span>;
+    <span class="keyword">return</span>;
+<span class="keyword">end</span>
+
+y = SubsDesc(A(1:n, 1:n), A(:, n+1));
+
+<span class="keyword">for</span> i=1:n
+    x(index(i)) = y(i);
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">Sistem incompatibil sau nedeterminat
+ans =
+
+    'error'
+
+</pre><h2 id="8">Metoda Substitutiei Descendente</h2><pre class="codeinput"><span class="keyword">function</span> [x] = SubsDesc(A,b)
+n = length(b);
+x(n) = 1/A(n,n) * b(n);
+k = n - 1;
+
+<span class="keyword">while</span> k&gt;0
+    sum=0;
+    <span class="keyword">for</span> j=k+1:n
+        sum = sum + A(k,j)*x(j);
+    <span class="keyword">end</span>
+    x(k) = 1/A(k,k) * (b(k) - sum);
+    k=k-1;
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">
+ans =
+
+    -1     2     1
+
+</pre><pre class="codeoutput">
+x =
+
+    3.8333    5.2222   -2.2222
+
+</pre><pre class="codeoutput">
+x =
+
+     3    -4
+
+</pre><h2 id="9">Metoda Substitutiei Ascendente</h2><pre class="codeinput"><span class="keyword">function</span> [x] = SubsAsc(A,b)
+n = length(b);
+x(1) = 1/A(1,1) * b(1);
+k=1;
+<span class="keyword">for</span> k=2:n-1
+
+    sum = 0;
+    <span class="keyword">for</span> j=1:k-1
+        sum=sum + A(k,j)*x(j);
+    <span class="keyword">end</span>
+    x(k) = 1/A(k,k)*(b(k) - sum);
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">
+y =
+
+    13     2
+
+</pre><h2 id="10">Factorizarea LU cu Gauss pivotare partiala</h2><pre class="codeinput"><span class="keyword">function</span> [L,U,w] = LU_GPP(A)
+n = size(A,1);
+L=eye(n);
+<span class="keyword">for</span> k=1:n-1
+    max = abs(A(k,k));
+       <span class="keyword">for</span> j=k:n
+           <span class="keyword">if</span> abs(A(j,k)) &gt; max
+               max = abs(A(j,k));
+               p=j;
+           <span class="keyword">end</span>
+       <span class="keyword">end</span>
+           w(k)=p;
+           <span class="keyword">if</span> p~=k
+                A([p,k], :) = A([k,p], :);
+           <span class="keyword">end</span>
+           <span class="keyword">for</span> l=k+1:n
+               llk=A(l,k)/A(k,k);
+               A(l,:)=A(l,:)-llk*A(k,:);
+           <span class="keyword">end</span>
+           <span class="keyword">if</span> k&gt;1
+               L([p,k],1:k-1)=L([k,p],1:k-1);
+           <span class="keyword">end</span>
+
+<span class="keyword">end</span>
+       <span class="keyword">if</span> A(n,n)==0
+           fprintf(<span class="string">'Sist. incomp. sau comp. nedet.'</span>);
+           x=<span class="string">'error'</span>;
+           <span class="keyword">return</span>;
+       <span class="keyword">end</span>
+       U=A;
+<span class="keyword">end</span>
+</pre><h2 id="11">Fatorizarea Cholesky</h2><pre class="codeinput"><span class="keyword">function</span> [L]=FactCholesky (A)
+
+n=size(A,1);
+alfa=A(1,1);
+<span class="keyword">if</span> alfa&lt;= 0
+    fprintf(<span class="string">'A nu admite factorizare Cholesky'</span>);
+    L=<span class="string">'error'</span>;
+    <span class="keyword">return</span>;
+<span class="keyword">end</span>
+L(1,1)=sqrt(alfa);
+<span class="keyword">for</span> i=2:n
+    L(i,1)=A(i,1)/L(1,1);
+<span class="keyword">end</span>
+<span class="keyword">for</span> k=2:n
+    sum=0;
+    <span class="keyword">for</span> s=1:k-1
+        sum=sum+L(k,s)*L(k,s);
+    <span class="keyword">end</span>
+    alfa=A(k,k)-sum;
+    <span class="keyword">if</span> alfa &lt;=0
+        fprintf(<span class="string">'A nu admite factorizare Cholesky'</span>);
+        L=<span class="string">'error'</span>;
+        <span class="keyword">return</span>;
+    <span class="keyword">end</span>
+    L(k,k)=sqrt(alfa);
+    <span class="keyword">for</span> i=k+1:n
+        sum=0;
+        <span class="keyword">for</span> s=1:k-1
+            sum=sum+L(i,s)*L(k,s);
+        <span class="keyword">end</span>
+        L(i,k)=(A(i,k)-sum)/L(k,k);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">
+L =
+
+     1     0     0
+     2     1     0
+     3     2     1
+
+
+y =
+
+    -5    -4
+
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+ %% Exercitiul 1
+
+A=[0 1 1;2 1 5;4 2 1];
+b=[3;5;1];
+GaussFaraPiv(A,b)
+GaussPivPart(A,b)
+GaussPivTot(A,b)
+
+A=[0 1 -2;1 -1 1;1 0 -1];
+b=[4;6;2];
+GaussFaraPiv(A,b)
+GaussPivPart(A,b)
+GaussPivTot(A,b)
+
+%% Exercitiul 3
+
+%c)
+eps=10^(-20);
+A=[eps 1;1 1];
+b=[1;2];
+GaussFaraPiv(A,b)
+GaussPivPart(A,b)
+
+C=10^(20);
+A=[1 C;1 1];
+b=[C;2];
+GaussPivPart(A,b)
+GaussPivTot(A,b)
+
+%Se poate observa ca Metoda GFP nu functioneaza pentru valori foarte mici
+%ale coeficientilor, iar GPP nu functioneaza pentru valori foarte mari ale
+%coeficientilor
+
+%% Exercitiul 5
+
+A=[1 2 -1;2 4 7;-1 2 5];
+b=[2;13;10];
+[L,U,w]=LU_GPP(A);
+n=length(w);
+for i=1:n-1
+    b([i,w(i)])=b([w(i),i]);
+end
+y=SubsAsc(L,b)
+x=SubsDesc(U,b)
+
+%% Exercitiul 8
+
+A=[1 2 3; 2 5 8;3 8 14];
+b=[-5;-14;-25];
+L=FactCholesky(A)
+y=SubsAsc(L,b)
+x=SubsDesc(L',y)
+
+%% Metoda Gauss fara pivotare
+function [x] = GaussFaraPiv(A,b)
+
+p=-1;
+n=size(A,1);
+A=[A,b];
+for k=1:n-1
+    for j=k:n
+        if A(j,k)~=0
+            p=j;
+            break;
+        end
+    end
+
+    if p==-1
+        fprintf('Sist. incomp. sau comp. nedet');
+        x='error';
+        return;
+    end
+    if p~=k
+        A([p,k],:)=A([k,p],:);
+    end
+    for l=k+1:n
+        mlk=A(l,k)/A(k,k);
+        A(l,:)=A(l,:)-mlk*A(k,:);
+    end
+end
+
+if A(n,n) == 0
+    fprintf('Sist. incomp. sau comp. nedet.');
+    x='error';
+    return;
+end
+
+x=SubsDesc(A(1:n,1:n),A(:,n+1));
+end
+
+%% Metoda Gauss cu pivotare partiala
+
+function [x] = GaussPivPart(A,b)
+
+n=size(A,1);
+A=[A,b];
+
+for k=1:n-1 
+    max = abs(A(k,k));
+    p=k;
+   for i=k:n
+       
+           if abs(A(i,k)) > max
+               max = abs(A(i,k));
+               p=i;
+           
+       end
+   end
+if(max==0)
+    fprintf('Sistem incompatibil sau nedeterminat');
+    x='error';
+    return;
+end
+if p~=k
+    A([p,k], :) = A([k,p], :); 
+end
+
+for l=k+1:n
+    M(l,k) = A(l,k)/A(k,k);
+    A(l,:) = A(l,:) - M(l,k)*A(k,:);
+end
+end
+
+if A(n,n) == 0
+    fprintf('Sistem incompatibil sau nedeterminat');
+    x='error';
+    return;
+end
+
+x = SubsDesc(A(1:n, 1:n), A(:, n+1));
+
+end
+
+
+%% Metoda Gauss cu pivotare totala
+
+function [x] = GaussPivTot(A,b)
+n=length(b); %n=size(A,1)
+index=1:n;
+A=[A,b];
+for k=1:n-1
+   max = abs(A(k,k));
+   for i=k:n
+       for j=k:n
+           if abs(A(i,j)) > max
+               max = abs(A(i,j));
+               p=i;
+               m=j;
+           end
+       end
+   end
+if(max==0)
+    fprintf('Sistem incompatibil sau nedeterminat');
+    x='error';
+    return;
+end
+if p~=k
+    A([p,k], :) = A([k,p], :); 
+end
+
+if m~=k
+    A(:, [m,k]) = A (:, [k,m]);
+    index([m,k])=index([k,m]);
+end
+
+for l=k+1:n
+    mlk = A(l,k)/A(k,k);
+    A(l,:) = A(l,:) - mlk*A(k,:);
+end
+end
+
+if A(n,n) == 0
+    fprintf('Sistem incompatibil sau nedeterminat');
+    x='error';
+    return;
+end
+
+y = SubsDesc(A(1:n, 1:n), A(:, n+1));
+
+for i=1:n
+    x(index(i)) = y(i);
+end
+end
+
+%% Metoda Substitutiei Descendente
+
+function [x] = SubsDesc(A,b)
+n = length(b);
+x(n) = 1/A(n,n) * b(n);
+k = n - 1;
+
+while k>0
+    sum=0;
+    for j=k+1:n
+        sum = sum + A(k,j)*x(j);
+    end
+    x(k) = 1/A(k,k) * (b(k) - sum);
+    k=k-1;
+end
+end
+
+%% Metoda Substitutiei Ascendente
+
+function [x] = SubsAsc(A,b)
+n = length(b);
+x(1) = 1/A(1,1) * b(1);
+k=1;
+for k=2:n-1
+    
+    sum = 0;
+    for j=1:k-1
+        sum=sum + A(k,j)*x(j);
+    end
+    x(k) = 1/A(k,k)*(b(k) - sum);
+end
+end
+
+%% Factorizarea LU cu Gauss pivotare partiala
+
+function [L,U,w] = LU_GPP(A)
+n = size(A,1);
+L=eye(n);
+for k=1:n-1
+    max = abs(A(k,k));
+       for j=k:n
+           if abs(A(j,k)) > max
+               max = abs(A(j,k));
+               p=j;
+           end
+       end
+           w(k)=p;
+           if p~=k
+                A([p,k], :) = A([k,p], :);
+           end
+           for l=k+1:n 
+               llk=A(l,k)/A(k,k);
+               A(l,:)=A(l,:)-llk*A(k,:);
+           end
+           if k>1
+               L([p,k],1:k-1)=L([k,p],1:k-1);
+           end
+       
+end
+       if A(n,n)==0
+           fprintf('Sist. incomp. sau comp. nedet.');
+           x='error';
+           return;
+       end
+       U=A;
+end
+
+%% Fatorizarea Cholesky
+function [L]=FactCholesky (A)
+
+n=size(A,1);
+alfa=A(1,1);
+if alfa<= 0
+    fprintf('A nu admite factorizare Cholesky');
+    L='error';
+    return;
+end
+L(1,1)=sqrt(alfa);
+for i=2:n
+    L(i,1)=A(i,1)/L(1,1);
+end
+for k=2:n
+    sum=0;
+    for s=1:k-1
+        sum=sum+L(k,s)*L(k,s);
+    end
+    alfa=A(k,k)-sum;
+    if alfa <=0
+        fprintf('A nu admite factorizare Cholesky');
+        L='error';
+        return;
+    end
+    L(k,k)=sqrt(alfa);
+    for i=k+1:n
+        sum=0;
+        for s=1:k-1
+            sum=sum+L(i,s)*L(k,s);
+        end
+        L(i,k)=(A(i,k)-sum)/L(k,k);
+    end
+end
+
+end
+
+
+##### SOURCE END #####
+--></body></html>

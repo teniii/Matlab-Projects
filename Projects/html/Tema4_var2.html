@@ -1,0 +1,833 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Tema4_var2</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-04-21"><meta name="DC.source" content="Tema4_var2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Exercitiul 1</a></li><li><a href="#2">Exercitiul 2</a></li><li><a href="#3">Exercitiul 3</a></li><li><a href="#4">Exercitiul 4</a></li><li><a href="#5">Algoritmii functiilor</a></li></ul></div><h2 id="1">Exercitiul 1</h2><pre class="codeinput">syms <span class="string">x</span> <span class="string">y</span>;
+f=x.^2+y.^2-4;
+g=x.^2/8-y;
+
+J=[diff(f1,x),diff(f1,y);diff(f2,x),diff(f2,y)];<span class="comment">%Jacobianul</span>
+fprintf(<span class="string">'Jacobianul: '</span>);
+J
+
+f=matlabFunction(f,<span class="string">'vars'</span>,{x,y});
+g=matlabFunction(g,<span class="string">'vars'</span>,{x,y});
+figure(1);
+fimplicit(f,[-3,3,-3,3]) <span class="comment">%Reprezentarea grafica a curbei C1</span>
+hold <span class="string">on</span>
+grid <span class="string">on</span>
+fimplicit(g,[-3,3,-3,3]) <span class="comment">%Reprezentarea grafica a curbei C2</span>
+
+axis <span class="string">equal</span>
+
+eps=10^(-6);
+F=@(x,y) [f(x,y);g(x,y)];
+J=matlabFunction(J,<span class="string">'vars'</span>,{x,y});
+
+x0=[-2;0]; <span class="comment">%punctul de pornire pentru primul punct</span>
+[xaprox,N]=MetNewton(F,J,x0,eps);
+xaprox
+plot(xaprox(1),xaprox(2),<span class="string">'o'</span>,<span class="string">'MarkerSize'</span>,8,<span class="string">'MarkerFaceColor'</span>,<span class="string">'y'</span>);
+grid <span class="string">on</span>
+hold <span class="string">on</span>
+x0=[2;0];<span class="comment">%punctul de pornire pentru al doilea punct</span>
+[xaprox,N]=MetNewton(F,J,x0,eps);
+xaprox
+plot(xaprox(1),xaprox(2),<span class="string">'o'</span>,<span class="string">'MarkerSize'</span>,8,<span class="string">'MarkerFaceColor'</span>,<span class="string">'y'</span>);
+</pre><pre class="codeoutput">Jacobianul:  
+J =
+ 
+[ 2*x, y/2]
+[ x/4,  -1]
+ 
+</pre><img vspace="5" hspace="5" src="Tema4_var2_01.png" alt=""> <h2 id="2">Exercitiul 2</h2><pre class="codeinput">syms <span class="string">x1</span> <span class="string">x2</span>
+f=x1.^2-10.*x1+x2.^2+8;
+g=x1.*x2.^2+x1-10.*x2+8;
+
+J=[diff(f,x1),diff(f,x2);diff(g,x1),diff(g,x2)];<span class="comment">%Jacobianul</span>
+fprintf(<span class="string">'Jacobianul: '</span>);
+J
+f=matlabFunction(f,<span class="string">'vars'</span>,{x1,x2});
+g=matlabFunction(g,<span class="string">'vars'</span>,{x1,x2});
+figure(2);
+fimplicit(f,[0,5,0,5]) <span class="comment">%Reprezentarea grafica a curbei C1</span>
+hold <span class="string">on</span>
+grid <span class="string">on</span>
+fimplicit(g,[0,5,0,5]) <span class="comment">%Reprezentarea grafica a curbei C2</span>
+
+axis <span class="string">equal</span>
+
+eps=10^(-6);
+F=@(x1,x2) [f(x1,x2);g(x1,x2)];
+J=matlabFunction(J,<span class="string">'vars'</span>,{x1,x2});
+x0=[0;0];<span class="comment">%Punctul de pornire pentru prima solutie</span>
+[xaprox,N]=MetNewton(F,J,x0,eps);
+xaprox
+plot(xaprox(1),xaprox(2),<span class="string">'o'</span>,<span class="string">'MarkerSize'</span>,8,<span class="string">'MarkerFaceColor'</span>,<span class="string">'y'</span>);
+grid <span class="string">on</span>
+hold <span class="string">on</span>
+
+x0=[3;2];<span class="comment">%Punctul de pornire pentru a doua solutie</span>
+[xaprox,N]=MetNewton(F,J,x0,eps);
+xaprox
+plot(xaprox(1),xaprox(2),<span class="string">'o'</span>,<span class="string">'MarkerSize'</span>,8,<span class="string">'MarkerFaceColor'</span>,<span class="string">'y'</span>);
+</pre><pre class="codeoutput">Jacobianul:  
+J =
+ 
+[ 2*x1 - 10,         2*x2]
+[  x2^2 + 1, 2*x1*x2 - 10]
+ 
+
+xaprox =
+
+    1.0000
+    1.0000
+
+
+xaprox =
+
+    2.1934
+    3.0205
+
+</pre><img vspace="5" hspace="5" src="Tema4_var2_02.png" alt=""> <h2 id="3">Exercitiul 3</h2><pre class="codeinput">f=@(x)sin(x);
+x=linspace(-pi/2,pi/2,3);
+y=f(x);
+y=y';
+
+figure(3);
+fplot(f,[-pi,pi]);
+hold <span class="string">on</span>
+grid <span class="string">on</span>
+axis <span class="string">equal</span>
+fprintf( <span class="string">'Prin metoda directa\n'</span>);
+a = MetDirecta(x,y);
+a
+syms <span class="string">X</span>;
+Pn = 0;
+<span class="keyword">for</span> i=1:length(a)
+    Pn = Pn + a(i)*X^(i-1);
+<span class="keyword">end</span>
+Pn
+Pn = matlabFunction(Pn, <span class="string">'vars'</span>, X);
+
+fprintf(<span class="string">'|Pn(pi/6) - f(pi/6)|='</span>);
+abs(Pn(pi/6) - f(pi/6))
+fplot(Pn,[-pi,pi]);
+
+<span class="comment">% Prin metoda Lagrange</span>
+fprintf( <span class="string">'Prin metoda Lagrange\n'</span>);
+fprintf( <span class="string">'|Pn(pi/6) - f(pi/6)|='</span>);
+abs(MetLagrange(x,y,[pi/6]) - f(pi/6)) <span class="comment">%Eroarea metodei Lagrange in pi/6</span>
+
+plot(linspace(-pi,pi,100), MetLagrange(x,y,linspace(-pi,pi,100)));
+<span class="comment">%reprezentarea grafica a polinomului obtinut prin metoda Lagrange</span>
+
+<span class="comment">% Prin metoda Newton</span>
+fprintf( <span class="string">'Prin metoda Newton\n'</span>);
+fprintf( <span class="string">'|Pn(pi/6) - f(pi/6)|='</span>);
+abs(MetNewtonDetPol(x,y,[pi/6]) - f(pi/6))<span class="comment">%Eroarea metodei Newton in pi/6</span>
+
+plot(linspace(-pi,pi,100), MetNewtonDetPol(x,y,linspace(-pi,pi,100)));
+<span class="comment">%reprezentarea grafica a polinomului obtinut prin metoda Newton</span>
+
+plot(pi/6, f(pi/6), <span class="string">'o'</span>,<span class="string">'MarkerSize'</span>, 8, <span class="string">'MarkerFaceColor'</span>, <span class="string">'k'</span>);
+plot(x, y, <span class="string">'o'</span>,  <span class="string">'MarkerSize'</span>, 8,<span class="string">'MarkerFaceColor'</span>, <span class="string">'y'</span>);
+</pre><pre class="codeoutput">Prin metoda directa
+
+a =
+
+         0    0.6366         0
+
+ 
+Pn =
+ 
+(5734161139222659*X)/9007199254740992
+ 
+|Pn(pi/6) - f(pi/6)|=
+ans =
+
+    0.1667
+
+Prin metoda Lagrange
+|Pn(pi/6) - f(pi/6)|=
+ans =
+
+    0.1667
+
+Prin metoda Newton
+|Pn(pi/6) - f(pi/6)|=
+ans =
+
+    0.1667
+
+</pre><img vspace="5" hspace="5" src="Tema4_var2_03.png" alt=""> <h2 id="4">Exercitiul 4</h2><pre class="codeinput">f = @(x)sin(x);
+n = 26;
+x = linspace(-pi/2,pi/2,n);
+y = f(x);
+y = y';
+
+figure(4);
+
+fprintf( <span class="string">'Prin metoda Lagrange\n'</span>);
+fprintf( <span class="string">'|Pn(pi/6) - f(pi/6)|='</span>);
+abs(MetLagrange(x,y,[pi/6]) - f(pi/6))
+plot(linspace(-pi,pi,100), MetLagrange(x,y,linspace(-pi,pi,100)));
+
+hold <span class="string">on</span>;
+grid <span class="string">on</span>;
+axis <span class="string">equal</span>;
+
+fprintf( <span class="string">'Prin metoda Newton\n'</span>);
+fprintf( <span class="string">'|Pn(pi/6) - f(pi/6)|='</span>);
+abs(MetNewtonDetPol(x,y,[pi/6]) - f(pi/6))
+plot(linspace(-pi,pi,100), MetNewtonDetPol(x,y,linspace(-pi,pi,100)));
+
+fprintf( <span class="string">'Prin metoda directa\n'</span>);
+fprintf( <span class="string">'|Pn(pi/6) - f(pi/6)|= '</span>);
+abs(MetDirectaEx4(x,y,[pi/6]) - f(pi/6))
+plot(linspace(-pi,pi,100), MetDirectaEx4(x,y,linspace(-pi,pi,100)));
+
+plot(x, y, <span class="string">'o'</span>, <span class="string">'MarkerSize'</span>, 6,<span class="string">'MarkerFaceColor'</span>, <span class="string">'y'</span> );
+legend(<span class="string">'Lagrange'</span>, <span class="string">'Newton'</span>, <span class="string">'Directa'</span>);
+txt=<span class="string">'Pentru n=26  polinomul deja incepe sa degenereze la capete'</span>;
+text(-2,1.5,txt);
+txt2=<span class="string">'\downarrow'</span>;
+text(2.888,0.5,txt2);
+txt=<span class="string">'iar eroarea metodei directe devine incalculabila'</span>;
+text(-2,1.25,txt);
+hold <span class="string">off</span>;
+</pre><pre class="codeoutput">Prin metoda Lagrange
+|Pn(pi/6) - f(pi/6)|=
+ans =
+
+   3.8858e-16
+
+Prin metoda Newton
+|Pn(pi/6) - f(pi/6)|=
+ans =
+
+   6.1062e-16
+
+Prin metoda directa
+|Pn(pi/6) - f(pi/6)|= 
+ans =
+
+   NaN
+
+</pre><img vspace="5" hspace="5" src="Tema4_var2_04.png" alt=""> <h2 id="5">Algoritmii functiilor</h2><pre class="codeinput"><span class="keyword">function</span> [xaprox,N]=MetNewton(F,J,x0,eps)
+k=1;
+x(:,k)=x0;
+<span class="keyword">while</span> true
+    k=k+1;
+    z=J(x(1,k-1),x(2,k-1))\(-F(x(1,k-1),x(2,k-1)));
+    x(:,k)=x(:,k-1)+z;
+    <span class="keyword">if</span> norm(z,2)&lt;eps
+        <span class="keyword">break</span>;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+xaprox=x(:,k);
+N=k;
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> [a]=MetDirecta(x,y)
+
+n=length(x)-1;
+
+<span class="keyword">for</span> i=1:n+1
+    A(i,1)=1;
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i=1:n+1
+    <span class="keyword">for</span> j=2:n+1
+        A(i,j)=x(i)^(j-1);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+a=GaussPivTot(A,y);
+<span class="comment">%a=A\transpose(A);</span>
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> [y] = MetLagrange(X, Y, x)
+  syms <span class="string">variabila</span>;
+  n = length(X);
+  Pn = 0;
+
+  <span class="keyword">for</span> k=1:n
+      Lnk = 1;
+      <span class="keyword">for</span> i=1:n
+          <span class="keyword">if</span> i==k
+              <span class="keyword">continue</span>
+          <span class="keyword">end</span>
+          Lnk = Lnk * (variabila-X(i)) / (X(k)-X(i));
+      <span class="keyword">end</span>
+      Pn = Pn + Lnk*Y(k);
+  <span class="keyword">end</span>
+
+  Pn = matlabFunction(Pn, <span class="string">'vars'</span>, variabila);
+  y = Pn(x);
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> [y] = MetNewtonDetPol(X, Y, x)
+  syms <span class="string">variabila</span>;
+  n = length(X);
+  Pn = 0;
+
+  <span class="keyword">for</span> i=1:n
+      <span class="keyword">for</span> j=1:n
+          <span class="keyword">if</span> j==1
+              A(i,j)=1;
+          <span class="keyword">elseif</span> j&gt;i
+              A(i,j)=0;
+          <span class="keyword">else</span>
+              prod = 1;
+              <span class="keyword">for</span> k=1:j-1
+                  prod = prod * (X(i)-X(k));
+              <span class="keyword">end</span>
+              A(i,j) = prod;
+          <span class="keyword">end</span>
+      <span class="keyword">end</span>
+  <span class="keyword">end</span>
+  c = SubsAsc(A, Y');
+
+  <span class="keyword">for</span> i=1:n-1
+      coeficient = c(i);
+      <span class="keyword">for</span> k=1:i-1
+          coeficient = coeficient * (variabila - X(k));
+      <span class="keyword">end</span>
+      Pn = Pn + coeficient;
+  <span class="keyword">end</span>
+
+  Pn = matlabFunction(Pn, <span class="string">'vars'</span>, variabila);
+  y = Pn(x);
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> [x] = SubsAsc(A,b)
+n = length(b);
+x(1) = 1/A(1,1) * b(1);
+k=1;
+<span class="keyword">for</span> k=2:n-1
+
+    sum = 0;
+    <span class="keyword">for</span> j=1:k-1
+        sum=sum + A(k,j)*x(j);
+    <span class="keyword">end</span>
+    x(k) = 1/A(k,k)*(b(k) - sum);
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> [x] = GaussPivTot(A,b)
+n=length(b); <span class="comment">%n=size(A,1)</span>
+index=1:n;
+A=[A,b];
+<span class="keyword">for</span> k=1:n-1
+   max = abs(A(k,k));
+   <span class="keyword">for</span> i=k:n
+       <span class="keyword">for</span> j=k:n
+           <span class="keyword">if</span> abs(A(i,j)) &gt; max
+               max = abs(A(i,j));
+               p=i;
+               m=j;
+           <span class="keyword">end</span>
+       <span class="keyword">end</span>
+   <span class="keyword">end</span>
+<span class="keyword">if</span>(max==0)
+    fprintf(<span class="string">'Sistem incompatibil sau nedeterminat'</span>);
+    x=<span class="string">'error'</span>;
+    <span class="keyword">return</span>;
+<span class="keyword">end</span>
+<span class="keyword">if</span> p~=k
+    A([p,k], :) = A([k,p], :);
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> m~=k
+    A(:, [m,k]) = A (:, [k,m]);
+    index([m,k])=index([k,m]);
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> l=k+1:n
+    mlk = A(l,k)/A(k,k);
+    A(l,:) = A(l,:) - mlk*A(k,:);
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> A(n,n) == 0
+    fprintf(<span class="string">'Sistem incompatibil sau nedeterminat'</span>);
+    x=<span class="string">'error'</span>;
+    <span class="keyword">return</span>;
+<span class="keyword">end</span>
+
+y = SubsDesc(A(1:n, 1:n), A(:, n+1));
+
+<span class="keyword">for</span> i=1:n
+    x(index(i)) = y(i);
+<span class="keyword">end</span>
+
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> [x] = SubsDesc(A,b)
+n = length(b);
+x(n) = 1/A(n,n) * b(n);
+k = n - 1;
+
+<span class="keyword">while</span> k&gt;0
+    sum=0;
+    <span class="keyword">for</span> j=k+1:n
+        sum = sum + A(k,j)*x(j);
+    <span class="keyword">end</span>
+    x(k) = 1/A(k,k) * (b(k) - sum);
+    k=k-1;
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> [y] = MetDirectaEx4(X, Y, x)
+  syms <span class="string">variabila</span>;
+  n = length(X);
+  <span class="keyword">for</span> i=1:n
+      A(i,1)=1;
+  <span class="keyword">end</span>
+
+  <span class="keyword">for</span> i=1:n
+      <span class="keyword">for</span> j=2:n
+          A(i,j) = X(i)^(j-1);
+      <span class="keyword">end</span>
+  <span class="keyword">end</span>
+
+  a = GaussPivTot(A, Y);
+  <span class="comment">%a=A\transpose(A)</span>
+  Pn = 0;
+
+  <span class="keyword">for</span> i=1:length(a)
+    Pn = Pn + a(i)*variabila^(i-1);
+  <span class="keyword">end</span>
+
+  Pn = matlabFunction(Pn, <span class="string">'vars'</span>, variabila);
+  y = Pn(x);
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">
+xaprox =
+
+   -1.9435
+    0.4721
+
+
+xaprox =
+
+    1.9435
+    0.4721
+
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Exercitiul 1
+
+syms x y;
+f=x.^2+y.^2-4;
+g=x.^2/8-y;
+
+J=[diff(f1,x),diff(f1,y);diff(f2,x),diff(f2,y)];%Jacobianul
+fprintf('Jacobianul: ');
+J
+
+f=matlabFunction(f,'vars',{x,y});
+g=matlabFunction(g,'vars',{x,y});
+figure(1);
+fimplicit(f,[-3,3,-3,3]) %Reprezentarea grafica a curbei C1
+hold on
+grid on
+fimplicit(g,[-3,3,-3,3]) %Reprezentarea grafica a curbei C2
+
+axis equal
+
+eps=10^(-6);
+F=@(x,y) [f(x,y);g(x,y)];
+J=matlabFunction(J,'vars',{x,y});
+
+x0=[-2;0]; %punctul de pornire pentru primul punct
+[xaprox,N]=MetNewton(F,J,x0,eps);
+xaprox
+plot(xaprox(1),xaprox(2),'o','MarkerSize',8,'MarkerFaceColor','y');
+grid on
+hold on
+x0=[2;0];%punctul de pornire pentru al doilea punct
+[xaprox,N]=MetNewton(F,J,x0,eps);
+xaprox
+plot(xaprox(1),xaprox(2),'o','MarkerSize',8,'MarkerFaceColor','y');
+
+%% Exercitiul 2
+
+syms x1 x2 
+f=x1.^2-10.*x1+x2.^2+8;
+g=x1.*x2.^2+x1-10.*x2+8;
+
+J=[diff(f,x1),diff(f,x2);diff(g,x1),diff(g,x2)];%Jacobianul
+fprintf('Jacobianul: ');
+J
+f=matlabFunction(f,'vars',{x1,x2});
+g=matlabFunction(g,'vars',{x1,x2});
+figure(2);
+fimplicit(f,[0,5,0,5]) %Reprezentarea grafica a curbei C1
+hold on
+grid on
+fimplicit(g,[0,5,0,5]) %Reprezentarea grafica a curbei C2
+
+axis equal
+
+eps=10^(-6);
+F=@(x1,x2) [f(x1,x2);g(x1,x2)];
+J=matlabFunction(J,'vars',{x1,x2});
+x0=[0;0];%Punctul de pornire pentru prima solutie
+[xaprox,N]=MetNewton(F,J,x0,eps);
+xaprox
+plot(xaprox(1),xaprox(2),'o','MarkerSize',8,'MarkerFaceColor','y');
+grid on
+hold on
+
+x0=[3;2];%Punctul de pornire pentru a doua solutie
+[xaprox,N]=MetNewton(F,J,x0,eps);
+xaprox
+plot(xaprox(1),xaprox(2),'o','MarkerSize',8,'MarkerFaceColor','y');
+
+%% Exercitiul 3
+
+f=@(x)sin(x);
+x=linspace(-pi/2,pi/2,3);
+y=f(x);
+y=y';
+
+figure(3);
+fplot(f,[-pi,pi]);
+hold on
+grid on
+axis equal
+fprintf( 'Prin metoda directa\n');
+a = MetDirecta(x,y);
+a
+syms X;
+Pn = 0;
+for i=1:length(a)
+    Pn = Pn + a(i)*X^(i-1);
+end
+Pn
+Pn = matlabFunction(Pn, 'vars', X);
+
+fprintf('|Pn(pi/6) - f(pi/6)|=');
+abs(Pn(pi/6) - f(pi/6))
+fplot(Pn,[-pi,pi]);
+
+% Prin metoda Lagrange
+fprintf( 'Prin metoda Lagrange\n');
+fprintf( '|Pn(pi/6) - f(pi/6)|=');
+abs(MetLagrange(x,y,[pi/6]) - f(pi/6)) %Eroarea metodei Lagrange in pi/6
+
+plot(linspace(-pi,pi,100), MetLagrange(x,y,linspace(-pi,pi,100)));
+%reprezentarea grafica a polinomului obtinut prin metoda Lagrange
+
+% Prin metoda Newton
+fprintf( 'Prin metoda Newton\n');
+fprintf( '|Pn(pi/6) - f(pi/6)|=');
+abs(MetNewtonDetPol(x,y,[pi/6]) - f(pi/6))%Eroarea metodei Newton in pi/6
+
+plot(linspace(-pi,pi,100), MetNewtonDetPol(x,y,linspace(-pi,pi,100)));
+%reprezentarea grafica a polinomului obtinut prin metoda Newton
+
+plot(pi/6, f(pi/6), 'o','MarkerSize', 8, 'MarkerFaceColor', 'k');
+plot(x, y, 'o',  'MarkerSize', 8,'MarkerFaceColor', 'y');
+
+
+%% Exercitiul 4
+f = @(x)sin(x);
+n = 26;
+x = linspace(-pi/2,pi/2,n);
+y = f(x);
+y = y';
+
+figure(4);
+
+fprintf( 'Prin metoda Lagrange\n');
+fprintf( '|Pn(pi/6) - f(pi/6)|=');
+abs(MetLagrange(x,y,[pi/6]) - f(pi/6))
+plot(linspace(-pi,pi,100), MetLagrange(x,y,linspace(-pi,pi,100)));
+
+hold on;
+grid on;
+axis equal;
+
+fprintf( 'Prin metoda Newton\n');
+fprintf( '|Pn(pi/6) - f(pi/6)|=');
+abs(MetNewtonDetPol(x,y,[pi/6]) - f(pi/6))
+plot(linspace(-pi,pi,100), MetNewtonDetPol(x,y,linspace(-pi,pi,100)));
+
+fprintf( 'Prin metoda directa\n');
+fprintf( '|Pn(pi/6) - f(pi/6)|= ');
+abs(MetDirectaEx4(x,y,[pi/6]) - f(pi/6))
+plot(linspace(-pi,pi,100), MetDirectaEx4(x,y,linspace(-pi,pi,100)));
+
+plot(x, y, 'o', 'MarkerSize', 6,'MarkerFaceColor', 'y' );
+legend('Lagrange', 'Newton', 'Directa');
+txt='Pentru n=26  polinomul deja incepe sa degenereze la capete';
+text(-2,1.5,txt);
+txt2='\downarrow';
+text(2.888,0.5,txt2);
+txt='iar eroarea metodei directe devine incalculabila';
+text(-2,1.25,txt);
+hold off;
+
+%% Algoritmii functiilor
+
+function [xaprox,N]=MetNewton(F,J,x0,eps)
+k=1;
+x(:,k)=x0;
+while true
+    k=k+1;
+    z=J(x(1,k-1),x(2,k-1))\(-F(x(1,k-1),x(2,k-1)));
+    x(:,k)=x(:,k-1)+z;
+    if norm(z,2)<eps
+        break;
+    end
+end
+
+xaprox=x(:,k);
+N=k;
+end
+
+function [a]=MetDirecta(x,y)
+
+n=length(x)-1;
+
+for i=1:n+1
+    A(i,1)=1;
+end
+
+for i=1:n+1
+    for j=2:n+1
+        A(i,j)=x(i)^(j-1);
+    end
+end
+
+a=GaussPivTot(A,y);
+%a=A\transpose(A);
+end
+
+function [y] = MetLagrange(X, Y, x)
+  syms variabila;
+  n = length(X);
+  Pn = 0;
+  
+  for k=1:n
+      Lnk = 1;
+      for i=1:n
+          if i==k
+              continue
+          end
+          Lnk = Lnk * (variabila-X(i)) / (X(k)-X(i));
+      end
+      Pn = Pn + Lnk*Y(k);
+  end
+  
+  Pn = matlabFunction(Pn, 'vars', variabila);
+  y = Pn(x);
+end
+
+function [y] = MetNewtonDetPol(X, Y, x)
+  syms variabila;
+  n = length(X);
+  Pn = 0;
+  
+  for i=1:n
+      for j=1:n
+          if j==1
+              A(i,j)=1;
+          elseif j>i
+              A(i,j)=0;
+          else
+              prod = 1;
+              for k=1:j-1
+                  prod = prod * (X(i)-X(k));
+              end
+              A(i,j) = prod;
+          end
+      end
+  end
+  c = SubsAsc(A, Y');
+  
+  for i=1:n-1
+      coeficient = c(i);
+      for k=1:i-1
+          coeficient = coeficient * (variabila - X(k));
+      end
+      Pn = Pn + coeficient;
+  end
+  
+  Pn = matlabFunction(Pn, 'vars', variabila);
+  y = Pn(x);
+end
+
+function [x] = SubsAsc(A,b)
+n = length(b);
+x(1) = 1/A(1,1) * b(1);
+k=1;
+for k=2:n-1
+    
+    sum = 0;
+    for j=1:k-1
+        sum=sum + A(k,j)*x(j);
+    end
+    x(k) = 1/A(k,k)*(b(k) - sum);
+end
+end
+
+function [x] = GaussPivTot(A,b)
+n=length(b); %n=size(A,1)
+index=1:n;
+A=[A,b];
+for k=1:n-1
+   max = abs(A(k,k));
+   for i=k:n
+       for j=k:n
+           if abs(A(i,j)) > max
+               max = abs(A(i,j));
+               p=i;
+               m=j;
+           end
+       end
+   end
+if(max==0)
+    fprintf('Sistem incompatibil sau nedeterminat');
+    x='error';
+    return;
+end
+if p~=k
+    A([p,k], :) = A([k,p], :); 
+end
+
+if m~=k
+    A(:, [m,k]) = A (:, [k,m]);
+    index([m,k])=index([k,m]);
+end
+
+for l=k+1:n
+    mlk = A(l,k)/A(k,k);
+    A(l,:) = A(l,:) - mlk*A(k,:);
+end
+end
+
+if A(n,n) == 0
+    fprintf('Sistem incompatibil sau nedeterminat');
+    x='error';
+    return;
+end
+
+y = SubsDesc(A(1:n, 1:n), A(:, n+1));
+
+for i=1:n
+    x(index(i)) = y(i);
+end
+
+end
+
+function [x] = SubsDesc(A,b)
+n = length(b);
+x(n) = 1/A(n,n) * b(n);
+k = n - 1;
+
+while k>0
+    sum=0;
+    for j=k+1:n
+        sum = sum + A(k,j)*x(j);
+    end
+    x(k) = 1/A(k,k) * (b(k) - sum);
+    k=k-1;
+end
+end
+
+function [y] = MetDirectaEx4(X, Y, x)
+  syms variabila;
+  n = length(X);
+  for i=1:n
+      A(i,1)=1;
+  end
+  
+  for i=1:n
+      for j=2:n
+          A(i,j) = X(i)^(j-1);
+      end
+  end
+  
+  a = GaussPivTot(A, Y);
+  %a=A\transpose(A)
+  Pn = 0;
+  
+  for i=1:length(a)
+    Pn = Pn + a(i)*variabila^(i-1);
+  end
+  
+  Pn = matlabFunction(Pn, 'vars', variabila);
+  y = Pn(x);
+end
+
+##### SOURCE END #####
+--></body></html>
